@@ -68,8 +68,9 @@ class _HomeState extends State<Home> {
 
       recognitions!.forEach((response) {
         result += response["label"] +
-            " " +
-            (response["confidence"] as double).toStringAsFixed(2);
+            "  " +
+            (response["confidence"] as double).toStringAsFixed(2) +
+            "\n\n";
       });
       setState(() {
         result;
@@ -90,73 +91,76 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dog Bread"),
+        title: const Text("Dog Bread"),
       ),
-      // body: Container(
-      //   decoration: BoxDecoration(
-      //     image: DecorationImage(
-      //       image: AssetImage("assets/back.jpg"),
-      //       fit: BoxFit.fill,
-      //     ),
-      //   ),
-      //   child: Column(
-      //     children: [
-      //       Stack(
-      //         children: [
-      //           Center(
-      //             child: Container(
-      //               height: 320.0,
-      //               width: 360.0,
-      //               child: Image.asset("assets/frame.jpg"),
-      //             ),
-      //           ),
-      //           Center(
-      //             child: TextButton(
-      //               onPressed: () {
-      //                 initCamera();
-      //               },
-      //               child: Container(
-      //                 margin: EdgeInsets.only(top: 35.0),
-      //                 height: 250.0,
-      //                 width: 340.0,
-      //                 child: imgCamera == null
-      //                     ? Container(
-      //                         height: 250.0,
-      //                         width: 340,
-      //                         child: Icon(
-      //                           Icons.photo_camera_front,
-      //                           color: Colors.pink,
-      //                           size: 28.0,
-      //                         ),
-      //                       )
-      //                     : AspectRatio(
-      //                         aspectRatio: cameraController!.value.aspectRatio,
-      //                         child: CameraPreview(cameraController!),
-      //                       ),
-      //               ),
-      //             ),
-      //           )
-      //         ],
-      //       ),
-      //       Center(
-      //         child: Container(
-      //           margin: EdgeInsets.only(top: 45.0),
-      //           child: SingleChildScrollView(
-      //             child: Text(
-      //               result,
-      //               style: const TextStyle(
-      //                 backgroundColor: Colors.white54,
-      //                 fontSize: 25,
-      //                 color: Colors.black,
-      //               ),
-      //               textAlign: TextAlign.center,
-      //             ),
-      //           ),
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/back.jpg"),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Center(
+                  child: SizedBox(
+                    height: 320.0,
+                    width: 360.0,
+                    child: Image.asset("assets/frame.jpg"),
+                  ),
+                ),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      initCamera();
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 35.0),
+                      height: 250.0,
+                      width: 340.0,
+                      child: imgCamera == null
+                          ? const SizedBox(
+                              height: 250.0,
+                              width: 340,
+                              child: Icon(
+                                Icons.photo_camera_front,
+                                color: Colors.pink,
+                                size: 28.0,
+                              ),
+                            )
+                          : AspectRatio(
+                              aspectRatio: cameraController!.value.aspectRatio,
+                              child: CameraPreview(cameraController!),
+                            ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Container(
+                margin: const EdgeInsets.only(top: 45.0),
+                child: SingleChildScrollView(
+                  child: Text(
+                    result,
+                    style: const TextStyle(
+                      backgroundColor: Colors.white54,
+                      fontSize: 25,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
